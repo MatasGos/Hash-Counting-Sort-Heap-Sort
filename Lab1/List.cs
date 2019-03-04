@@ -49,9 +49,78 @@ namespace Sort
             prevNode.data = a;
             currentNode.data = b;
         }
-        public void Heapify(int n, int i)
+        public void buildHeap(int n, int i)
         {
-            Console.WriteLine("Something is wrong. Go figure");
+            int largest = i; // Initialize largest as root 
+            int l = 2 * i + 1; // left = 2*i + 1 
+            int r = 2 * i + 2; // right = 2*i + 2 
+
+            MyLinkedListNode current = first;
+            MyLinkedListNode left = first;
+            MyLinkedListNode right = first;
+            int ii = i;
+
+            if (l < n)
+            {
+                while (l > 0)
+                {
+                    current = current.next();
+                    l--;
+                }
+            }
+            if (r < n)
+            {
+                while (r > 0)
+                {
+                    current = current.next();
+                    r--;
+                }
+            }
+            while (current != null && ii > 0)
+            {
+                current = current.next();
+                ii--;
+            }
+
+            if (left > current)
+                largest = l;
+
+            // If right child is larger than largest so far 
+            if (right > current)
+                largest = r;
+
+            // If largest is not root 
+            if (largest != i)
+            {
+                current = first;
+                while (i > 0)
+                {
+                    i--;
+                    current.nextNode();
+                }
+                double swapfrom = current.data;
+                current = first;
+                while (largest>0)
+                {
+                    largest--;
+                    current.nextNode();
+                }
+                double swapto = current.data;
+                current.data = swapto;
+                current = first;
+                while (i > 0)
+                {
+                    i--;
+                    current.nextNode();
+                }
+                current.data = swapfrom;
+                data[i] = data[largest];
+                data[largest] = swap;
+
+                // Recursively heapify the affected sub-tree 
+                buildHeap(n, largest);
+            }
         }
+
     }
 }

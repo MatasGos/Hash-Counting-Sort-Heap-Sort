@@ -31,6 +31,23 @@ namespace Sort
             myArray.Print(myArray.Length);
 
         }
+        public static void Test_List(int seed)
+        {
+            int n = 12;
+            MyDataList mylist = new MyDataList(n, seed);
+            myList.Print(myList.Length);
+            for (int i = myList.Length / 2 - 1; i >= 0; i--)
+            {
+                myList.buildHeap(myList.Length, i);
+            }
+            for (int i = myList.Length - 1; i >= 0; i--)
+            {
+                myList.Swap(i);
+                myList.buildHeap(i, 0);
+            }
+            Console.WriteLine("Done");
+            myList.Print(myArray.Length);
+        }
 
     }
     abstract class DataArray
