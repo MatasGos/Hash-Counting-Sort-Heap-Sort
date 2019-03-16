@@ -10,7 +10,8 @@ namespace Sort
         {
             int seed = (int)DateTime.Now.Ticks & 0x0000FFFF;
 
-            Test_Array(seed);
+            //Test_Array(seed);
+            Test_List(seed);
         }
         public static void Test_Array(int seed)
         {
@@ -34,7 +35,7 @@ namespace Sort
         public static void Test_List(int seed)
         {
             int n = 12;
-            MyDataList mylist = new MyDataList(n, seed);
+            MyDataList myList = new MyDataList(n, seed);
             myList.Print(myList.Length);
             for (int i = myList.Length / 2 - 1; i >= 0; i--)
             {
@@ -46,7 +47,7 @@ namespace Sort
                 myList.buildHeap(i, 0);
             }
             Console.WriteLine("Done");
-            myList.Print(myArray.Length);
+            myList.Print(myList.Length);
         }
 
     }
@@ -70,7 +71,7 @@ namespace Sort
         public int Length { get { return length;  } }
         public abstract double Head();
         public abstract double Next();
-        public abstract void Swap(double a, double b);
+        public abstract void Swap(int n);
         public void Print(int n)
         {
             Console.Write(" {0:F5} ", Head());

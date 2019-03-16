@@ -11,7 +11,7 @@ namespace Counting
             int[] count = new int[256];
             double[] arr = { 10.1, 5, 3 };
             count[1] = 100;
-            Console.WriteLine(count[]);
+            //Console.WriteLine(count[]);
 
             //Test_Array(seed);
         }

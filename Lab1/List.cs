@@ -44,10 +44,33 @@ namespace Sort
             currentNode = currentNode.nextNode;
             return currentNode.data;
         }
-        public override void Swap(double a, double b)
+        public override void Swap(int n)
         {
-            prevNode.data = a;
-            currentNode.data = b;
+            currentNode = headNode;
+            while (n>0)
+            {
+                currentNode = currentNode.nextNode;
+                n--;
+            }
+            double swap = currentNode.data;
+            currentNode.data = headNode.data;
+            headNode.data = swap; 
+        }
+        public void test()
+        {
+            currentNode=headNode;
+            currentNode.nextNode.data = 0;
+        }
+        public void test2(int a)
+        {
+            int leftIndex = a;
+            currentNode = headNode;
+            while (leftIndex > 0)
+            {
+                currentNode = currentNode.nextNode;
+                leftIndex--;
+            }
+            Console.WriteLine("test2"+headNode.data);
         }
         public void buildHeap(int n, int i)
         {
@@ -55,69 +78,82 @@ namespace Sort
             int l = 2 * i + 1; // left = 2*i + 1 
             int r = 2 * i + 2; // right = 2*i + 2 
 
-            MyLinkedListNode current = first;
-            MyLinkedListNode left = first;
-            MyLinkedListNode right = first;
-            int ii = i;
+            MyLinkedListNode current = headNode;
 
+            int largestIndex = i;
+            while (largest > 0)
+            {
+                current = current.nextNode;
+                largest--;
+            }
+            MyLinkedListNode left = current;
+            MyLinkedListNode right = current;
+            largest = i;
+            double rootData = current.data;
+            double largestData = current.data;
+            // suranda kaires reiksme
             if (l < n)
             {
-                while (l > 0)
+                int leftIndex = l-i;
+                while (leftIndex > 0)
                 {
-                    current = current.next();
-                    l--;
-                }
+                    left = left.nextNode;
+                    leftIndex--;
+                }         
             }
+            // suranda desines reiksme
             if (r < n)
             {
-                while (r > 0)
+                int rightIndex = r-i;
+                while (rightIndex > 0)
                 {
-                    current = current.next();
-                    r--;
+                    right = right.nextNode;
+                    rightIndex--;
                 }
             }
-            while (current != null && ii > 0)
-            {
-                current = current.next();
-                ii--;
+            Console.WriteLine(rootData + " " + left.data + " " + right.data);
+
+            if(r < n)
+                {
+                if (left.data > right.data)
+                {
+                    if (current.data < left.data)
+                    {
+                        largest = l;
+                        Console.WriteLine(left.data + " su "+current.data);
+                        largestData = left.data;
+                        left.data = current.data;
+                        current.data = largestData;
+                    }
+
+                }
+                else
+                {
+                    if (current.data < right.data)
+                    {
+                        largest = r;
+                        Console.WriteLine(right.data + " su " + current.data);
+                        largestData = right.data;
+                        right.data = current.data;
+                        current.data = largestData;
+                    }
+                }
             }
+            else if (l < n)
+            {
 
-            if (left > current)
-                largest = l;
-
-            // If right child is larger than largest so far 
-            if (right > current)
-                largest = r;
-
+                if (current.data < left.data)
+                {
+                    largest = l;
+                    Console.WriteLine(left.data + " su " + current.data);
+                    largestData = left.data;
+                    left.data = current.data;
+                    current.data = largestData;
+                }
+            }
             // If largest is not root 
             if (largest != i)
             {
-                current = first;
-                while (i > 0)
-                {
-                    i--;
-                    current.nextNode();
-                }
-                double swapfrom = current.data;
-                current = first;
-                while (largest>0)
-                {
-                    largest--;
-                    current.nextNode();
-                }
-                double swapto = current.data;
-                current.data = swapto;
-                current = first;
-                while (i > 0)
-                {
-                    i--;
-                    current.nextNode();
-                }
-                current.data = swapfrom;
-                data[i] = data[largest];
-                data[largest] = swap;
-
-                // Recursively heapify the affected sub-tree 
                 buildHeap(n, largest);
             }
         }
