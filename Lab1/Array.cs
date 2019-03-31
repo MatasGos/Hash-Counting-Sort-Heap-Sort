@@ -32,26 +32,19 @@ namespace Sort
         }
         public void buildHeap(int n, int i)
         {
-            int largest = i; // Initialize largest as root 
+            int largest = i; 
             int l = 2 * i + 1; // left = 2*i + 1 
             int r = 2 * i + 2; // right = 2*i + 2 
-
-            // If left child is larger than root 
             if (l < n && data[l] > data[largest])
                 largest = l;
-
-            // If right child is larger than largest so far 
             if (r < n && data[r] > data[largest])
                 largest = r;
-
-            // If largest is not root 
             if (largest != i)
             {
                 double swap = data[i];
                 data[i] = data[largest];
                 data[largest] = swap;
 
-                // Recursively heapify the affected sub-tree 
                 buildHeap(n, largest);
             }
         }

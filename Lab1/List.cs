@@ -56,22 +56,6 @@ namespace Sort
             currentNode.data = headNode.data;
             headNode.data = swap; 
         }
-        public void test()
-        {
-            currentNode=headNode;
-            currentNode.nextNode.data = 0;
-        }
-        public void test2(int a)
-        {
-            int leftIndex = a;
-            currentNode = headNode;
-            while (leftIndex > 0)
-            {
-                currentNode = currentNode.nextNode;
-                leftIndex--;
-            }
-            Console.WriteLine("test2"+headNode.data);
-        }
         public void buildHeap(int n, int i)
         {
             int largest = i; // Initialize largest as root 
@@ -111,7 +95,6 @@ namespace Sort
                     rightIndex--;
                 }
             }
-            Console.WriteLine(rootData + " " + left.data + " " + right.data);
 
             if(r < n)
                 {
@@ -120,7 +103,6 @@ namespace Sort
                     if (current.data < left.data)
                     {
                         largest = l;
-                        Console.WriteLine(left.data + " su "+current.data);
                         largestData = left.data;
                         left.data = current.data;
                         current.data = largestData;
@@ -132,7 +114,6 @@ namespace Sort
                     if (current.data < right.data)
                     {
                         largest = r;
-                        Console.WriteLine(right.data + " su " + current.data);
                         largestData = right.data;
                         right.data = current.data;
                         current.data = largestData;
@@ -145,7 +126,6 @@ namespace Sort
                 if (current.data < left.data)
                 {
                     largest = l;
-                    Console.WriteLine(left.data + " su " + current.data);
                     largestData = left.data;
                     left.data = current.data;
                     current.data = largestData;
